@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Ploeh.AutoFixture;
 
 namespace uTest.Tests
 {
@@ -26,7 +27,17 @@ namespace uTest.Tests
             var firstNum = 1;   //設定兩個要相加的變數值
             var secondNum = 2;
             var expected = 3;   //設定最後預期結果
+            var fixture = new Fixture();
+            //建立一筆資料
+            var b = fixture.Create<ToDoItem>();
+            var e = fixture.CreateMany<ToDoItem>(20);
 
+            var d = fixture.Build<ToDoItem>()
+                .With(x => x.id, 1)
+                .With(x => x.description, "123")
+                .With(x => x.isExit, false)
+                .With(x => x.datetime, new DateTime())
+                .Create();
             //Act
             //實際呼叫Class1類別中Add 函式
             var actual = c.Add(firstNum, secondNum);
@@ -54,6 +65,14 @@ namespace uTest.Tests
 
         }
 
+        public class ToDoItem
+        {
+            public int id { get; set; }
+            public string description { get; set; }
+            public bool isExit { get; set; }
+            public DateTime datetime { get; set; }
+            public string[] stringList { get; set; }
+        }
 
     }
 }
