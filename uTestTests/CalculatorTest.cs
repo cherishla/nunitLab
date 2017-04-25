@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FluentAssertions;
 
 namespace uTest.Tests
 {
@@ -33,7 +34,8 @@ namespace uTest.Tests
 
             //Assert
             //確認預期結果值與實際呼叫結果值是否相等
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "我覺得這是對的");
+
         }
 
         [Test()]
@@ -47,7 +49,8 @@ namespace uTest.Tests
             //Act
             var actual = c.minusTest(firstNum, secondNum);
             //Assert
-            Assert.AreEqual(expected, actual);
+            actual.Should().Be(expected, because: "我覺得這是對的");
+
 
         }
 
