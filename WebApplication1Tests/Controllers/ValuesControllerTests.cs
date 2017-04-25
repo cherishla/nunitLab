@@ -47,7 +47,6 @@ namespace WebApplication1.Controllers.Tests
         {
             var actual = c.Post(new ToDoItem());
             actual.Should().BeOfType<BadRequestResult>(because: "測試一個空物件");
-            Mock
         }
     }
 }
