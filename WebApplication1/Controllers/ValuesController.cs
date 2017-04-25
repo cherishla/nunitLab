@@ -23,8 +23,13 @@ namespace WebApplication1.Controllers
         }
 
         // POST api/values
-        public void Post([FromBody]string value)
+        public IHttpActionResult Post(ToDoItem value)
         {
+            if (ModelState.IsValid)
+            {
+                return Created<ToDoItem>("/api/values/" + value.ID, value);
+            }
+            return BadRequest();
         }
 
         // PUT api/values/5
