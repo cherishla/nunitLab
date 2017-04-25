@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using FluentAssertions;
 using System.Web.Http.Results;
 using Telerik.JustMock;
+using Microsoft.QualityTools.Testing.Fakes;
 
 namespace WebApplication1.Controllers.Tests
 {
@@ -56,10 +57,20 @@ namespace WebApplication1.Controllers.Tests
         public void Post_測試傳入大於2018_3_1的目前日期()
         {
             Mock.Arrange(() => DateTime.Now).Returns(new DateTime(2018, 3, 1));
-            var actual = c.Post(new ToDoItem());
-            actual.Should().BeNull();
 
-        }
+            using (ShimsContext.Create())
+            {
+                System.Fakes.ShimDateTime.DateTime.NowGet = () =>
+                {
+                    return new DateTime(2018, 1, 1);
+                };
+
+
+                var actual = c.Post(new ToDoItem());
+                actual.Should().BeNull();
+
+            }
+        }   
     }
 }
 
