@@ -46,11 +46,19 @@ namespace WebApplication1.Controllers.Tests
         [Test()]
         public void Post_測試一個空物件()
         {
-            Mock.Arrange(() => DateTime.Now).Returns(new DateTime(2018,2,1));
             Mock.Arrange(() => c.ModelState.IsValid).Returns(false);
             var actual = c.Post(new ToDoItem());
             actual.Should().BeOfType<BadRequestResult>(because: "測試一個空物件");
             
+        }
+
+        [Test()]
+        public void Post_測試傳入大於2018_3_1的目前日期()
+        {
+            Mock.Arrange(() => DateTime.Now).Returns(new DateTime(2018, 3, 1));
+            var actual = c.Post(new ToDoItem());
+            actual.Should().BeNull();
+
         }
     }
 }
