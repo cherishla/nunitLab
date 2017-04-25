@@ -25,6 +25,10 @@ namespace WebApplication1.Controllers
         // POST api/values
         public IHttpActionResult Post(ToDoItem value)
         {
+            if (DateTime.Now > new DateTime(2018, 1, 1))
+            {
+                return null;
+            }
             if (ModelState.IsValid)
             {
                 return Created<ToDoItem>("/api/values/" + value.ID, value);
