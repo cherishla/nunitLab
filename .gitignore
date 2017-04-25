@@ -3,3 +3,7 @@
 ################################################################################
 
 /packages/NUnit.3.6.1
+/uTest/bin/Debug
+/uTest/obj/Debug
+/uTestTests/bin/Debug
+/uTestTests/obj/Debug
