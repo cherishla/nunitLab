@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
 using System.Web.Http.Results;
+using Telerik.JustMock;
 
 namespace WebApplication1.Controllers.Tests
 {
@@ -45,8 +46,10 @@ namespace WebApplication1.Controllers.Tests
         [Test()]
         public void Post_測試一個空物件()
         {
+            Mock.Arrange(() => c.ModelState.IsValid).Returns(false);
             var actual = c.Post(new ToDoItem());
             actual.Should().BeOfType<BadRequestResult>(because: "測試一個空物件");
+            
         }
     }
 }
